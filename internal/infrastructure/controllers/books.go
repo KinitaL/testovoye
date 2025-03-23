@@ -31,6 +31,13 @@ func NewController(usecase usecase) *Controller {
 }
 
 // GetAll handles HTTP GET requests to retrieve all books.
+// @Summary Get all books
+// @Description Retrieves a list of all books.
+// @Tags books
+// @Produce json
+// @Success 200 {array} models.Book
+// @Failure 500 {object} map[string]string "error"
+// @Router /api/books [get]
 func (c *Controller) GetAll(ctx echo.Context) error {
 	books, err := c.u.GetAll(ctx.Request().Context())
 	if err != nil {
@@ -40,6 +47,16 @@ func (c *Controller) GetAll(ctx echo.Context) error {
 }
 
 // GetOne handles HTTP GET requests to retrieve a book by its ID.
+// @Summary Get a single book
+// @Description Retrieves a book by its unique ID.
+// @Tags books
+// @Produce json
+// @Param id path string true "Book ID"
+// @Success 200 {object} models.Book
+// @Failure 400 {object} map[string]string "Invalid book ID"
+// @Failure 404 {object} map[string]string "Book not found"
+// @Failure 500 {object} map[string]string "Internal Server Error"
+// @Router /api/books/{id} [get]
 func (c *Controller) GetOne(ctx echo.Context) error {
 	ID, err := uuid.Parse(ctx.Param("id"))
 	if err != nil {
@@ -56,6 +73,16 @@ func (c *Controller) GetOne(ctx echo.Context) error {
 }
 
 // Create handles HTTP POST requests to create a new book.
+// @Summary Create a new book
+// @Description Adds a new book to the database.
+// @Tags books
+// @Accept json
+// @Produce json
+// @Param book body dto.CreateBookDto true "Book Data"
+// @Success 200
+// @Failure 400 {object} map[string]string "Invalid request body"
+// @Failure 500 {object} map[string]string "Internal Server Error"
+// @Router /api/books [post]
 func (c *Controller) Create(ctx echo.Context) error {
 	var book dto.CreateBookDto
 	if err := ctx.Bind(&book); err != nil {
@@ -75,6 +102,17 @@ func (c *Controller) Create(ctx echo.Context) error {
 }
 
 // Update handles HTTP PATCH requests to update an existing book.
+// @Summary Update an existing book
+// @Description Modifies the details of an existing book.
+// @Tags books
+// @Accept json
+// @Produce json
+// @Param id path string true "Book ID"
+// @Param book body models.Book true "Updated Book Data"
+// @Success 200
+// @Failure 400 {object} map[string]string "Invalid book ID / Invalid request body"
+// @Failure 500 {object} map[string]string "Internal Server Error"
+// @Router /api/books/{id} [patch]
 func (c *Controller) Update(ctx echo.Context) error {
 	id, err := uuid.Parse(ctx.Param("id"))
 	if err != nil {
@@ -94,6 +132,14 @@ func (c *Controller) Update(ctx echo.Context) error {
 }
 
 // Delete handles HTTP DELETE requests to remove a book by ID.
+// @Summary Delete a book
+// @Description Removes a book from the database using its ID.
+// @Tags books
+// @Param id path string true "Book ID"
+// @Success 200
+// @Failure 400 {object} map[string]string "Invalid book ID"
+// @Failure 500 {object} map[string]string "Internal Server Error"
+// @Router /api/books/{id} [delete]
 func (c *Controller) Delete(ctx echo.Context) error {
 	id, err := uuid.Parse(ctx.Param("id"))
 	if err != nil {

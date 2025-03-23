@@ -4,7 +4,8 @@
 - main - версия после выполнения всех заданий
 - task1 - версия с заданием 1
 - task2 - версия с заданием 2
-- task3 - версис с заданием 3
+- task3 - версия с заданием 3
+- task4 - версия с заданием 4
 
 #### Task 2
 Для использования БД нужно:
@@ -17,3 +18,7 @@
 ```
 make test
 ```
+
+#### Task 4
+File: ./docs/swagger/api/api_swagger.json
+Endpoint: /swagger/api/index.html
