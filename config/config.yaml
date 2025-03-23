@@ -3,3 +3,10 @@ service:
   development: true
 logs:
   middlewareLogLevel: "info"
+db:
+  host: localhost
+  port: 5432
+  user: test
+  password: test
+  dbName: books
+  sslMode: disable

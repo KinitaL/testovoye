@@ -7,6 +7,7 @@ import (
 type Config struct {
 	Service Service `yaml:"service"`
 	Logs    Logs    `yaml:"logs"`
+	DB      DB      `yaml:"db"`
 }
 
 func NewConfig() (*Config, error) {
