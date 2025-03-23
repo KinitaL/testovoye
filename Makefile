@@ -1,0 +1,6 @@
+test:
+	make generate
+	go test -v ./...
+
+generate:
+	go generate ./...
