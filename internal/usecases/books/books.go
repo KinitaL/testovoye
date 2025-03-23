@@ -6,6 +6,9 @@ import (
 	"github.com/google/uuid"
 )
 
+//go:generate go install go.uber.org/mock/mockgen@v0.5.0
+//go:generate mockgen -destination usecase_mock.go -package books . Books
+
 // Books interface defines the main operations for managing books.
 type (
 	Books interface {
